@@ -1,0 +1,71 @@
+{
+  "root": "apps/visuales",
+  "sourceRoot": "apps/visuales/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/visuales",
+        "index": "apps/visuales/src/index.html",
+        "baseHref": "/",
+        "main": "apps/visuales/src/main.tsx",
+        "polyfills": "apps/visuales/src/polyfills.ts",
+        "tsConfig": "apps/visuales/tsconfig.app.json",
+        "assets": ["apps/visuales/src/favicon.ico", "apps/visuales/src/assets"],
+        "styles": ["apps/visuales/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/visuales/src/environments/environment.ts",
+              "with": "apps/visuales/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "visuales:build",
+        "hmr": true,
+        "proxyConfig": "apps/visuales/proxy.conf.json"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "visuales:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/visuales/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/visuales"],
+      "options": {
+        "jestConfig": "apps/visuales/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,28 @@
+{
+  "root": "apps/visuales-e2e",
+  "sourceRoot": "apps/visuales-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/visuales-e2e/cypress.json",
+        "devServerTarget": "visuales:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "visuales:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/visuales-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["visuales"]
+}
